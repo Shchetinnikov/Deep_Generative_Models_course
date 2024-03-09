@@ -17,16 +17,20 @@
 **Эксперименты:**
 **Результаты обучения:**
 1. Пример результата генератора словаря стилей:
-![alt text](/homework_1/imgs/dict_style.png)
+<div align="left">
+    <img src="/homework_1/imgs/dict_style.png">
+</div>
 2. Пример результата попиксельного генератора стилей:
-![alt text](/homework_1/imgs/pixel_style.png)
+<div align="left">
+    <img src="/homework_1/imgs/pixel_style.png">
+</div>
 
 **Логирование обучения:**
 
 **Директории/Файлы:**
-Директория с файлами исследования: `notebooks`
-Файлы с результатами попиксельной генерации: `generated_avatars`
-Файл с зависимостями: `requarements.txt`
+- Директория с файлами исследования: `notebooks`
+- Файлы с результатами попиксельной генерации: `generated_avatars`
+- Файл с зависимостями: `requarements.txt`
 
 
 ## Задача-2 | Классификации лунок
@@ -86,5 +90,5 @@ dataset
 - Weights & Biases
 
 **Директории/Файлы:**
-Директория с файлами исследования: `notebooks`
-Файл с зависимостями: `requarements.txt`
+- Директория с файлами исследования: `notebooks`
+- Файл с зависимостями: `requarements.txt`
