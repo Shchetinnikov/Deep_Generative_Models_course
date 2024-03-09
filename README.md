@@ -1,2 +1,7 @@
-# Deep_Generative_Models
-Course of deep generative models. ITMO University. AI Talent Hub.
+# Deep Generative Models
+Курс по глубоким генеративным моделям. Университет ИТМО. AI Talent Hub.
+
+**Студент(ФИО):** Щетинников Константин Дмитриевич
+
+**Лабораторные работы:**
+1. Байесовская генерация и автоэнкодеры | `branch: homework_1`
