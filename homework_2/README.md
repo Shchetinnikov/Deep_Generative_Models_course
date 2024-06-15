@@ -13,8 +13,9 @@
 4. Добиться схдимости (регуляризации, изменение архитектуры, фишки с train loop)
 
 **Датасет:** [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
-![img.png](imgs/img.png)
-
+<div style='text-align:center'>
+  <img src ='imgs/img.png'>
+</div>
 
 
 ### Результаты
