@@ -2,9 +2,13 @@
 
 **Описание задачи:**
 1. Имплементировать CSPup блок
-![CSPup блок](imgs/csp_up.jpg)
+<div style='text-align:center'>
+  <img src ='imgs/csp_up.jpg'>
+</div>
 2. Имплементировать генератор GAN по заданной архитектурной схеме
-![Архитектура генератора](imgs/generator.jpg)
+<div style='text-align:center'>
+  <img src ='imgs/generator.jpg'>
+</div>
 3. Обучить имплементированный GAN
 4. Добиться схдимости (регуляризации, изменение архитектуры, фишки с train loop)
 
