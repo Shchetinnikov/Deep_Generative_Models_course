@@ -1,0 +1,11 @@
+numpy==1.26.2
+opencv-python==4.9.0.80
+torch==2.1.1
+torchmetrics==1.2.0
+torchvision==0.16.1
+tornado==6.3.3
+tqdm==4.66.1
+Pillow==10.1.0
+matplotlib==3.8.3
+matplotlib-inline==0.1.6
+jupyterlab==4.0.9

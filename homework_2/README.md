@@ -1,98 +1,95 @@
-# Лабораторная работа №1 | Байесовская генерация и автоэнкодеры
-
-## Задача-1 | Байесовская генерация стилей
-**Идея:**
-Решение задачи генерации данных с условием независимости компонентов случайной величины.
+# Лабораторная работа №2 | Имплементация GAN
 
 **Описание задачи:**
-Используя данные о популярных стилях из файла `styles.py` написать генератор (можно в виде функции, можно в виде класса [generator](https://wiki.python.org/moin/Generators)):
-1. На основе формулы MLE и формулы Байеса о полной вероятности генерировать случайный стиль с возвращением вероятности;
-2. Используя в качестве фичей пиксели изображений аватаров (см папку avatars) написать генератор изображений, который генерирует новый аватар: генератор выбирает значение каждого канала каждого пикселя используя распределение вероятностей, полученных на основе изображений avatars; генерация так же осуществляется с помощью MLE;
-3. Выложить в репозиторий 5 сгенерированных аватаров
+1. Имплементировать CSPup блок
+![CSPup блок](imgs/csp_up.jpg)
+2. Имплементировать генератор GAN по заданной архитектурной схеме
+![Архитектура генератора](imgs/generator.jpg)
+3. Обучить имплементированный GAN
+4. Добиться схдимости (регуляризации, изменение архитектуры, фишки с train loop)
 
-**Датасет:**
-1. данные о стилях (см. файл `styles.py`)
-2. изображения аватаров (см. папку `avatars`)
-
-**Результаты обучения:**
-1. Пример результата генератора словаря стилей:
-<div align="left">
-    <img src="/homework_1/imgs/dict_style.png" width=360px>
-</div>
-2. 5 примеров результата попиксельного генератора стилей:
-<div align="left">
-    <img src="/homework_1/generated_avatars/avatar_1.jpg" width=200px>
-    <img src="/homework_1/generated_avatars/avatar_2.jpg" width=200px>
-    <img src="/homework_1/generated_avatars/avatar_3.jpg" width=200px>
-    <img src="/homework_1/generated_avatars/avatar_4.jpg" width=200px>
-    <img src="/homework_1/generated_avatars/avatar_5.jpg" width=200px>
-
-</div>
-
-**Директории/Файлы:**
-- Блокнот с генератором словаря стилей и попиксельным генератором: 
-`notebooks/styles_generator.ipynb`
-- Файлы с результатами попиксельной генерации: `generated_avatars`
-- Файл с зависимостями: `requirements.txt`
+**Датасет:** [CelebA](https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
+![img.png](imgs/img.png)
 
 
-## Задача-2 | Классификации лунок
-**Идея:**
-Решение задачи классификации с помощью автоэнкодоров в условиях сильной разбалансировки классов.
 
-**Описание задачи:**
-Используя изображения лунок, в которые льют металл, написать и обучить автоэнкодер для определения проливов металла:
-1. Имплементировать или найти автоэнкодер (можно для старта взять пример из лекции по автоэнкодерам);
-2. Обучить автоэнкодер на не_проливах (dataset\train)
-    **Замечание:** если через такой автоэнкодер прогнать изображение пролива, то MSE между входным изображением и выходным будет больше, чем если прогнать изображение без пролива. Следовательно, если определить некоторое пороговое значение MSE, можно классифицировать изображение на классы пролив\не_пролив. Если MSE между входной картинкой и выходной больше фиксированного порога, то на изображении пролив.
-3. Написать метод классификации лунок;
-4. На изображениях из dataset\test протестировать качество;(True_positive_rate и True_negative_rate).
+### Результаты
+#### GAN
 
-**Датасет:**
-Данные - вырезанные изображения лунок, в которые льют металл.
-![Пример разливочного стола](imgs/example.jpg)
+```text
+Generator(
+  (norm): ConvTranspose2d(100, 1024, kernel_size=(4, 4), stride=(1, 1), bias=False)
+  (csp_up_block1): CSPUpBlock(
+    (upsample): ConvTranspose2d(512, 512, kernel_size=(2, 2), stride=(2, 2))
+    (upsample1): ConvTranspose2d(512, 512, kernel_size=(2, 2), stride=(2, 2))
+    (conv1): Conv2d(1024, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+    (conv3_1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (conv3_2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (csp_up_block2): CSPUpBlock(
+    (upsample): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+    (upsample1): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+    (conv1): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+    (conv3_1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (conv3_2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (csp_up_block3): CSPUpBlock(
+    (upsample): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2))
+    (upsample1): ConvTranspose2d(128, 128, kernel_size=(2, 2), stride=(2, 2))
+    (conv1): Conv2d(256, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+    (conv3_1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (conv3_2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (csp_up_block4): CSPUpBlock(
+    (upsample): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2))
+    (upsample1): ConvTranspose2d(64, 64, kernel_size=(2, 2), stride=(2, 2))
+    (conv1): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+    (conv3_1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (conv3_2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+  )
+  (deconv2d): ConvTranspose2d(64, 3, kernel_size=(2, 2), stride=(2, 2))
+  (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+)
+Discriminator(
+  (conv1): Conv2d(3, 64, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+  (conv2): Conv2d(64, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+  (conv3): Conv2d(128, 256, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+  (conv4): Conv2d(256, 512, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+  (conv5): Conv2d(512, 1024, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1))
+  (conv6): Conv2d(1024, 1, kernel_size=(4, 4), stride=(1, 1))
+  (relu): LeakyReLU(negative_slope=0.2, inplace=True)
+  (sigmoid): Sigmoid()
+)
 
 ```
-dataset
-├── proliv  # изображения с проливами
-|       ├── 000.jpg
-│       ├── 001.jpg
-│       │   └── ...
-|
-├── test  # тестовая выборка где перемешаны проливы и не_проливы
-│       ├── imgs
-│       │   ├── 000.jpg
-│       │   ├── 001.jpg
-│       │   └── ...
-│       └── test_annotation.txt
-|
-├── train  #  обучающая выборка из не_проливов
-|       ├── 000.jpg
-│       ├── 001.jpg
-│       └── ...
-```
+#### Обучение модели
 
-**Эксперименты:**
-1. Визуализация латентного пространства:
-    <div align="left">
-        <img src="/homework_1/imgs/latent.jpg" width=500px>
-    </div>
-2. Визулизация распределения значений лосс-функции на примерах с проливами и без проливов:
-    <div align="left">
-        <img src="/homework_1/imgs/mse_dist.jpg" width=500px>
-    </div>
+![imgs/img.png](imgs/logs_tensorboard.png)
 
-**Результаты обучения:**
-1. График лосс-функций в процессе обучения:
-    <div align="left">
-        <img src="/homework_1/imgs/loss.jpg" width=800px>
-    </div>
-2. Метрики качества классификатора: \
-    True Positive Rate (TPR): 0.7907 \
-    True Negative Rate (TNR): 0.8442
+Обнаружен mode colapse.
+Эксперименты:
+- Уменьшение learninge rate у дескриминатора
+- Изменение количества эпох
+- Модификация CSPup-блока - изменение функции активации
+
+<div style='text-align:center'>
+  <img src ='imgs/generate_img.png'>
+  <p style='text-align:center'> Обучение на 3х эпохах </p>
+</div>
+
+<div style='text-align:center'>
+  <img src ='imgs/generate_img_10.png'>
+  <p style='text-align:center'> Обучение на 10и эпохах </p>
+</div>
 
 
 **Директории/Файлы:**
-- Блокнот решения задачи классификации лунок автоэнкодером:
-`notebooks/autoencoder_cls.ipynb`
+- Блокноты решения задачи:
+  - Структурированная версия (pytorch_lightning) - `source/pl_wrapper.py`
+  - Имплементация CSPup и реализация дескриминатора - `source/model.py`
+  - Обучение модели: `notebooks/run.ipynb`
 - Файл с зависимостями: `requirements.txt`
