@@ -19,9 +19,9 @@
 
 Как упомянуто выше, нужно переозвучить вокал вашей моделью и подставить музыку обратно. Можно сделать это в [Reaper](https://www.reaper.fm/) или любым другим удобным вам способом.
 
-Мелодия-1: `sound/Katya_Lel_-_Musi-pusi_48203796.mp3`
-Мелодия-2: `sound/System_of_a_Down_-_Chop_Suey_47958313.mp3`
-Рендер после инференса: `sound/render_katya_lel.wav`
+Мелодия-1: `sound/Katya_Lel_-_Musi-pusi_48203796.mp3` \
+Мелодия-2: `sound/System_of_a_Down_-_Chop_Suey_47958313.mp3` \
+Рендер после инференса: `sound/render_katya_lel.wav` 
 
 **Вывод**
 У исполнителя мелодии-1 появился акцент
