@@ -7,4 +7,5 @@
 
 1. Байесовская генерация и автоэнкодеры | `branch: homework_1`
 2. Имплементация GAN | `branch: homework_2`
-2. StyleGAN | `branch: homework_3`
+3. StyleGAN | `branch: homework_3`
+4. Обучение Stable diffusion 1.5 методом Dreambooth | `branch: homework_4`
